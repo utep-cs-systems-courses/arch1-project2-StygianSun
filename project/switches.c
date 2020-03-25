@@ -1,6 +1,8 @@
 #include <msp430.h>
 #include "switches.h"
 #include "led.h"
+#include "buzzer.h"
+#include "littleLamb.h"
 #include "stateMachines.h"
 
 char switch_state_down1, switch_state_down2, switch_state_down3,
@@ -33,5 +35,28 @@ void switch_interrupt_handler()
   switch_state_down3 = (p2val & SW3) ? 0 : 1;
   switch_state_down4 = (p2val & SW4) ? 0 : 1;
 
+  if(switch_state_down1){
+    state = 1;
+    substate = 0;
+    buzzer_set_period(0);
+  }else if(switch_state_down2){
+    state = 2;
+    substate = 0;
+    buzzer_set_period(0);
+  }else if(switch_state_down3){
+    buzzer_set_period(0);
+    red_on = 0;
+    green_on = 0;
+    state = 3;
+    substate = 0;
+    ll_cur_note = 0;
+    llbeat = 1;
+    llmeasure = 1;
+  }else if(switch_state_down4){
+    state = 4;
+    substate = 0;
+    buzzer_set_period(0);
+  }
+  
   switch_state_changed = 1;
 }
