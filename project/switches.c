@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include "switches.h"
 #include "led.h"
+#include "stateMachines.h"
 
 char switch_state_down1, switch_state_down2, switch_state_down3,
   switch_state_down4, switch_state_changed;
@@ -31,5 +32,6 @@ void switch_interrupt_handler()
   switch_state_down2 = (p2val & SW2) ? 0 : 1;
   switch_state_down3 = (p2val & SW3) ? 0 : 1;
   switch_state_down4 = (p2val & SW4) ? 0 : 1;
+
   switch_state_changed = 1;
 }

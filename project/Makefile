@@ -11,7 +11,7 @@ AS              = msp430-elf-as
 all: test.elf 
 
 #additional rules for files
-test.elf: ${COMMON_OBJECTS} blinkMain.o stateMachines.o led.o buzzer.o p2_interrupt_handler.o switches.o wdInterruptHandler.o ../lib/libTimer.a
+test.elf: ${COMMON_OBJECTS} projectMain.o stateMachines.o led.o buzzer.o p2_interrupt_handler.o switches.o wdInterruptHandler.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 load: test.elf
@@ -29,5 +29,3 @@ stateMachines.o: led.h stateMachines.h
 buzzer.o: buzzer.c buzzer.h
 
 switches.o: switches.c switches.h
-
-p2_interrupt_handler.o: p2_interrupt_handler.c
