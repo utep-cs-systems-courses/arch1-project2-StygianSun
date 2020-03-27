@@ -39,10 +39,9 @@ void switch_interrupt_handler()
     state = 1;
     substate = 0;
     buzzer_set_period(0);
+    count = 5;
   }else if(switch_state_down2){
     state = 2;
-    substate = 0;
-    buzzer_set_period(0);
   }else if(switch_state_down3){
     buzzer_set_period(0);
     red_on = 0;
@@ -55,7 +54,6 @@ void switch_interrupt_handler()
   }else if(switch_state_down4){
     state = 4;
     substate = 0;
-    buzzer_set_period(0);
   }
   
   switch_state_changed = 1;

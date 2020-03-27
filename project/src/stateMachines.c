@@ -6,6 +6,7 @@
 
 int substate = 0;
 int state = 1;
+int count = 4;
 
 char toggle_red()		/* always toggle! */
 {
@@ -25,20 +26,17 @@ void state_advance()		/* alternate between toggling red & green */
   
   switch (state) {
   case 1:
-    switch(substate){ //will use assembly function
-    case 0: changed = 1; red_on = 1; green_on = 0; substate = 1; buzzer_set_period(0); break;
-    case 1: changed = toggle_green(); substate = 2; break;
-    case 2: changed = toggle_red(); substate = 3; break;
-    case 3: changed = toggle_green(); substate = 0; break;
+    switch(substate){
+    case 0: changed = 1; red_on = 0; green_on = 0; substate++; break;
+    case 1:
+    case 2:
+    case 3:
+      changed = 0; substate++; break;
+    case 4:
+      changed = 1; red_on = 1; green_on = 1; substate = 0; break;
     }
     break;
-  case 2:
-    switch(substate){
-    case 0: changed = 1; red_on = 0; green_on = 1; substate = 1; break;
-    case 1: changed = toggle_green(); substate = 2; break;
-    case 2: changed = toggle_red(); toggle_green(); substate = 3; break;
-    case 3: changed = toggle_green(); substate = 0; break;
-    }
+  case 2: //Intentionally left blank. Is intended to act as a "halt" button
     break;
   case 3: littleLambAdvance(); break;
   case 4:

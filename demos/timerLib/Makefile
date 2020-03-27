@@ -16,6 +16,10 @@ install: libTimer.a
 	mv $^ ../lib
 	cp *.h ../h
 
+installProject: libTimer.a
+	mkdir -p ../../project/h ../../project/lib
+	mv $^ ../../project/lib
+	cp *.h ../../project/h
+
 clean:
 	rm -f timerLib.a *.o
-
