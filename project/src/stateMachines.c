@@ -6,7 +6,6 @@
 
 int substate = 0;
 int state = 1;
-int count = 4;
 
 char toggle_red()		/* always toggle! */
 {
@@ -20,11 +19,11 @@ char toggle_green()	/* only toggle green if red is on!  */
   return 1;
 }
 
-void state_advance()		/* alternate between toggling red & green */
+void state_advance() /* Advances substate of the current state */
 {
   char changed = 0;
   
-  switch (state) {
+  switch (state) { // Dim state
   case 1:
     switch(substate){
     case 0: changed = 1; red_on = 0; green_on = 0; substate++; break;
@@ -38,8 +37,8 @@ void state_advance()		/* alternate between toggling red & green */
     break;
   case 2: //Intentionally left blank. Is intended to act as a "halt" button
     break;
-  case 3: littleLambAdvance(); break;
-  case 4:
+  case 3: littleLambAdvance(); break; //Advances through Mary Had a Little Lamb
+  case 4: //LED and Buzzer cycle state
     switch(substate){
     case 0: changed = 1; red_on = 1; green_on = 1; substate = 1; buzzer_set_period(5000); break;
     case 1: changed = toggle_red(); substate = 2; buzzer_set_period(6000); break;

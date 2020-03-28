@@ -7,9 +7,9 @@ int ll_cur_note = 0;
 int llbeat = 1;
 int llmeasure = 1;
 
-int verse[] = {B, A, G, A, B, A, B, A, G, A, B, A, B, A, G};
+int verse[] = {B, A, G, A, B, A, B, A, G, A, B, A, B, A, G}; //Note progression for song
 
-void littleLambAdvance(){
+void littleLambAdvance(){ //Based on the current measure and beat, advances note if necessary and turns on LEDs and buzzer
   switch(llmeasure){
   case 1:
   case 5:
