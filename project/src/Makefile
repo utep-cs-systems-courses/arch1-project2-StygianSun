@@ -8,14 +8,14 @@ LDFLAGS		= -L/opt/ti/msp430_gcc/include
 CC              = msp430-elf-gcc
 AS              = msp430-elf-as
 
-all: test.elf 
+all: toy.elf 
 
 #additional rules for files
-test.elf: ${COMMON_OBJECTS} projectMain.o stateMachines.o led.o buzzer.o p2_interrupt_handler.o switches.o wdInterruptHandler.o littleLamb.o ../lib/libTimer.a
+toy.elf: ${COMMON_OBJECTS} projectMain.o stateMachines.o led.o buzzer.o p2_interrupt_handler.o switches.o wdInterruptHandler.o littleLamb.o statesAssembly.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
-load: test.elf
-	msp430loader.sh test.elf
+load: toy.elf
+	msp430loader.sh toy.elf
 
 clean:
 	rm -f *.o *.elf
@@ -31,3 +31,5 @@ buzzer.o: buzzer.c buzzer.h
 switches.o: switches.c switches.h
 
 littleLamb.o: littleLamb.c littleLamb.h
+
+statesAssembly.o: statesAssembly.s statesAssembly.h

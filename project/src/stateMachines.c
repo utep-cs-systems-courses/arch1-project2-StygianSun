@@ -3,6 +3,8 @@
 #include "led.h"
 #include "buzzer.h"
 #include "switches.h"
+#include "littleLamb.h"
+#include "statesAssembly.h"
 
 int substate = 0;
 int state = 1;
@@ -39,12 +41,7 @@ void state_advance() /* Advances substate of the current state */
     break;
   case 3: littleLambAdvance(); break; //Advances through Mary Had a Little Lamb
   case 4: //LED and Buzzer cycle state
-    switch(substate){
-    case 0: changed = 1; red_on = 1; green_on = 1; substate = 1; buzzer_set_period(5000); break;
-    case 1: changed = toggle_red(); substate = 2; buzzer_set_period(6000); break;
-    case 2: changed = toggle_red(); toggle_green(); substate = 3; buzzer_set_period(7000); break;
-    case 3: changed = toggle_red(); substate = 0; buzzer_set_period(8000); break;
-    }
+    assemblyState();
     break;
   }
 
